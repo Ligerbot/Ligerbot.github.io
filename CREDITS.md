@@ -1,3 +1,5 @@
-# Credits for my website:
+# Credits for my website
+## Code, Pictures, etc:
 * Google Fonts for the Ubuntu Font
-! The pictures are mine unless shown above.
+## Other stuff:
+__The pictures are mine unless shown above.__
