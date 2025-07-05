@@ -24,7 +24,7 @@ a {
   padding: 35px;
 }
 welcome {
-  font-size: 64px;
+  font-size: 32px;
   align: center;
 }
 p {
@@ -49,4 +49,29 @@ nav {
   opacity: 0.6;
   padding: 5px;
   border-radius: 10px;
+}
+.projects {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.item {
+  opacity: 1;
+  height: 200px;
+  width: 25%;
+  border-radius: 15px;
+  padding: 10px;
+  background-color: gray;
+  flex: 0 0 auto;
+  margin-right: 10px;
+  background: #8a8a8a;
+  background: linear-gradient(90deg,rgba(138, 138, 138, 1) 0%, rgba(176, 127, 155, 1) 100%);
+}
+img {
+  width: 40%;
+  float: left;
+}
+desc {
+  display: inline-block;
 }
