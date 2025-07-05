@@ -3,60 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lumetec Message Board</title>
+  <title>Ligerbot's Website</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body> 
 <nav>
-  <a href="/index.html">Message Board</a>
-  <a href="/test.html">Test Message Board</a>
+  <a href="/index.html">Home</a>
+  <a href="/test.html">Test Front Page</a>
 </nav>
-
-<div id="chat-container">
-  <h2>Lumetec Message Board</h2>
-  <br>
-  <div class="dropdown">
-    <drop class="dropbtn">Rules:</drop>
-    <div class="dropdown-content">
-      <p>Don't try to hack the webchat, otherwise you will be fed to the ferocious killer chicken.</p>
-      <p>The backend is located at backend.py. The file with the conversation in it is located at out.txt.</p>
-      <p>The model in use is at /models.txt. If you are the admin, go to </p><a href="/admin.html">the admin page</a>
-      <p>If you need a permanent log, go to</p><a href="/permanent.log">the permanent log</a>
-      <p>Changelog:</p>
-      <iframe src="changelog.txt" width="50%" height="400px"></iframe>
-      <img src='../dwayne_killer.jpg', width='227', height='403'>
-    </div>
-  </div>
-  <button id="request">Request a cheeseburger</button>
-  <div class="model-select">
-    <drop class="modelbtn">select model</drop>
-    <div class="model-select-content">
-      <button id="tinyllama">tinyllama</button>
-      <a href="/tinyllama.html">?</a>
-  <br>
-      <button id="orca-mini">orca-mini</button>
-      <a href="/orca-mini.html">?</a>
-  <br>
-      <button id="llama3">llama3 (broken sry)</button>
-      <a href="/llama3.html">?</a>
-  <br>
-      <button id="llama4">llama4</button>
-      <a href="/llama4.html">?</a>
-  <br>
-      <button id="deepseek-r1">deepseek</button>
-      <a href="/deepseek.html">?</a>
-    </div>
-  </div>
-  <div id="chat-container">
-  <div id="chat-messages"></div>
-  <center>
-  <input type="text" id="message-input" placeholder="Type your message">
-  <button id="send-message">Send</button>
-  <status id="status">Enable JS</status>
-  <model id="model">Model: Error</model>
-  </center>
-  </div>
-</div>
 <script>
 //chat.scrollTop = chat.scrollHeight;
 model = checkModel();
