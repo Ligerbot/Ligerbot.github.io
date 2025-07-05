@@ -16,14 +16,16 @@
 </nav>
 
 <main>
-<h1>Welcome to ligerbot.github.io!</h1>
+<welcome id="welcome">Enable JS for this page to work!</welcome>
 </main>
 
 </body>
 </html>
 <script>
+  const message = "Welcome to ";
   console.clear();
   console.log("Welcome to Ligerbot.github.io!");
   console.log("The console should have cleared. If it didn't then I recommend you enable console.clear");
   console.log("Please feel free to fix and HTML/CSS/JS issues here!");
+  document.getElementById("welcome").textContent = message + location.hostname;
 </script>
