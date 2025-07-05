@@ -42,8 +42,9 @@ h3 {
   padding: 0px 10px;
 }
 nav {
-  width:1240px;
-  height:35px;
+  width: auto;
+  /*height:35px;*/
+  height: 25%;
   margin:left;
   background-color: white;
   opacity: 0.6;

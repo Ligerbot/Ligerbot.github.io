@@ -11,12 +11,44 @@
 </head>
 <body> 
 <nav>
-  <a href="/index.html">Home</a>
-  <a href="/test.html">Test Front Page</a>
+  <center>
+    <a href="/index.html">Home</a>
+    <a href="/test.html">Test Front Page</a>
+  </center>
 </nav>
 
 <main>
-<welcome>Enable JS!!!</welcome>
+<welcome id="welcome">Enable JS for this page to work!</welcome>
+<p>Something here</p>
+<h2>Project index</h2>
+<div class="projects">
+  <div class="item">
+    <h2>Project tile 1</h2>
+    <img src="/rocket.png">This description is for my project. It will be multiple lines long and should wrap and display properly on all devices.</img>
+  </div>
+  <div class="item">
+    <h2>Project tile 2</h2>
+    <img src="/rocket.png">This description is for my project. It will be multiple lines long and should wrap and display properly on all devices.</img>
+  </div>
+  <div class="item">
+    <h2>Project tile 3</h2>
+    <img src="/rocket.png">This description is for my project. It will be multiple lines long and should wrap and display properly on all devices.</img>
+  </div>
+  <div class="item">
+    <h2>Project tile 4</h2>
+    <img src="/rocket.png">This description is for my project. It will be multiple lines long and should wrap and display properly on all devices.</img>
+  </div>
+  <div class="item">
+    <h2>Project tile 5</h2>
+    <img src="/rocket.png">This description is for my project. It will be multiple lines long and should wrap and display properly on all devices.</img>
+  </div>
+</div>
+<h2>Other stuff</h2>
+<p>Some smaller text here!</p>
+<h2>Another category!</h2>
+<p>So you need to scroll</p>
+<h2>Last category for now</h2>
+<p>Cool</p>
 </main>
 
 </body>
@@ -27,5 +59,5 @@
   console.log("Welcome to Ligerbot.github.io!");
   console.log("The console should have cleared. If it didn't then I recommend you enable console.clear");
   console.log("Please feel free to fix and HTML/CSS/JS issues here!");
-//  document.getElementById("welcome").textContent = message + document.location;
+  document.getElementById("welcome").textContent = message + location.hostname + "!";
 </script>
