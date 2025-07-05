@@ -1,1 +1,254 @@
-Test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lumetec Message Board</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body> 
+<nav>
+  <a href="/index.html">Message Board</a>
+  <a href="/test.html">Test Message Board</a>
+</nav>
+
+<div id="chat-container">
+  <h2>Lumetec Message Board</h2>
+  <br>
+  <div class="dropdown">
+    <drop class="dropbtn">Rules:</drop>
+    <div class="dropdown-content">
+      <p>Don't try to hack the webchat, otherwise you will be fed to the ferocious killer chicken.</p>
+      <p>The backend is located at backend.py. The file with the conversation in it is located at out.txt.</p>
+      <p>The model in use is at /models.txt. If you are the admin, go to </p><a href="/admin.html">the admin page</a>
+      <p>If you need a permanent log, go to</p><a href="/permanent.log">the permanent log</a>
+      <p>Changelog:</p>
+      <iframe src="changelog.txt" width="50%" height="400px"></iframe>
+      <img src='../dwayne_killer.jpg', width='227', height='403'>
+    </div>
+  </div>
+  <button id="request">Request a cheeseburger</button>
+  <div class="model-select">
+    <drop class="modelbtn">select model</drop>
+    <div class="model-select-content">
+      <button id="tinyllama">tinyllama</button>
+      <a href="/tinyllama.html">?</a>
+  <br>
+      <button id="orca-mini">orca-mini</button>
+      <a href="/orca-mini.html">?</a>
+  <br>
+      <button id="llama3">llama3 (broken sry)</button>
+      <a href="/llama3.html">?</a>
+  <br>
+      <button id="llama4">llama4</button>
+      <a href="/llama4.html">?</a>
+  <br>
+      <button id="deepseek-r1">deepseek</button>
+      <a href="/deepseek.html">?</a>
+    </div>
+  </div>
+  <div id="chat-container">
+  <div id="chat-messages"></div>
+  <center>
+  <input type="text" id="message-input" placeholder="Type your message">
+  <button id="send-message">Send</button>
+  <status id="status">Enable JS</status>
+  <model id="model">Model: Error</model>
+  </center>
+  </div>
+</div>
+<script>
+//chat.scrollTop = chat.scrollHeight;
+model = checkModel();
+function scroll(box){
+  console.log("scrolling");
+  box.scrollTo({
+    top: box.scrollHeight,
+    behavior: 'smooth'
+  });
+}
+console.log("Default model is: " + model);
+  document.getElementById("tinyllama").addEventListener("click", function() {
+    model = "tinyllama";
+    setModel(model);
+    console.log("Changed model to: " + model);
+    window.alert("Changed model to: " + model);
+  });
+  document.getElementById("orca-mini").addEventListener("click", function() {
+    model = "orca-mini"; 
+    setModel(model);
+    console.log("Changed model to: " + model);
+    window.alert("Changed model to: " + model);
+  });
+  document.getElementById("llama3").addEventListener("click", function() {
+    model = "llama3";
+    setModel(model);
+    console.log("Changed model to: " + model);
+    window.alert("Changed model to: " + model);
+  });
+  document.getElementById("llama4").addEventListener("click", function() {
+    model = "llama4";
+    setModel(model);
+    console.log("Changed model to: " + model);
+    window.alert("Changed model to: " + model);
+  });
+  document.getElementById("deepseek-r1").addEventListener("click", function() {
+    model = "deepseek";
+    setModel(model);
+    console.log("Changed model to: " + model);
+    window.alert("Changed model to: " + model);
+  });
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+      document.getElementById("send-message").click();
+    }
+  });
+  const request = document.getElementById("request");
+    request.addEventListener("click", () => {
+      request.classList.toggle("toggled");
+      document.getElementById("request").textContent = "Cheeseburger requested; please wait";
+      alert("Your cheeseburger has arrived");
+      window.location.href = "/chezburger.html";
+    });
+  document.getElementById("status").style.color = "green";
+  document.getElementById("status").textContent = "Status: Idle";
+function getModel(){
+  fetch('model.txt', {cache: "no-store"})
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById("model").textContent = "Model: " + data;
+    })
+  }
+function checkCookieAndRedirect() {
+  const exists = document.cookie.split('; ').some(cookie => cookie.startsWith('name='));
+  if(exists){
+    const realname = document.cookie.split('; ').find(row => row.startsWith('name='))?.split('=')[1];
+    console.log(realname);
+    console.log("Name preset");
+    return realname;
+  }
+  var cookie = prompt('Please set your name. If your name is bob you would enter it like "Bob". If you already set your name then you can just reenter it:');
+  while(cookie == null){
+    cookie = prompt('Please set your name. If your name is bob you would enter it like "Bob". If you already set your name then you can just reenter it:');
+  }
+  document.cookie = "name=" + cookie;
+  const realname = document.cookie.split('; ').find(row => row.startsWith('name='))?.split('=')[1];
+  console.log("Name not set. Setting it to " + realname);
+  return realname;
+}
+function checkModel(){
+  const exists = document.cookie.split('; ').some(cookie => cookie.startsWith('model='));
+  if(exists){
+    const model = document.cookie.split('; ').find(row => row.startsWith('model='))?.split('=')[1];
+    console.log("Model set from cookie to " + model)
+    return model;
+  }
+}
+
+function setModel(model){
+  document.cookie = "model=" + model;
+}
+
+// Run the cookie check and redirection logic
+
+const nameInput = checkCookieAndRedirect();
+
+const chatContainer = document.getElementById('chat-container');
+let prev_data = "";
+const chatMessages = document.getElementById('chat-messages');
+const updateInterval = 2000; // Update every 1/2 seconds (adjust as needed)
+const cookie = document.cookie;
+function fetchConsoleOutput() {
+  document.getElementById("status").style.color = "orange";
+  document.getElementById("status").textContent = "Status: Fetching";
+  getModel();
+  fetch('out.txt', {cache: "no-store"})
+    .then(response => response.text())
+    .then(data => {
+      // Process and display new messages
+      const formattedMessages = formatMessages(data);
+      chatMessages.innerHTML = formattedMessages;
+      if (prev_data != data){
+        const chat = document.getElementById("chat-messages");
+        scroll(chat);
+      }
+      prev_data = data;
+    })
+    .catch(error => console.error(error));
+  document.getElementById("status").style.color = "green";
+  document.getElementById("status").textContent = "Status: Idle";
+  setTimeout(fetchConsoleOutput, updateInterval);
+}
+
+// Get input and button elements
+//const nameInput = document.getElementById('name-input');
+const messageInput = document.getElementById('message-input');
+const sendMessageButton = document.getElementById('send-message');
+
+// Add event listener to send button click
+sendMessageButton.addEventListener('click', function() {
+  const name = nameInput;
+  const message = messageInput.value.trim();
+  if (name && message) {
+    document.getElementById("status").style.color = "orange";
+    document.getElementById("status").textContent = "Status: Posting";
+    // Construct formatted message with proper escaping
+    const formattedMessage = escapeHtml(`[${name}] ${message}`);
+
+    // Send message to server (implementation details below)
+    console.log(formattedMessage);
+    sendMessageToServer(formattedMessage);
+    messageInput.value = '';
+  }
+});
+
+// Function to send message to server (implementation needed)
+function sendMessageToServer(message) {
+  console.log(model);
+  const data = JSON.stringify({ 
+    message: message,
+    model: model
+  });
+
+  fetch('http://' + location.host + '/send', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: data
+  })
+  .then(response => console.log("Response: " + response.text()))
+  .then(data => {console.log(data)})
+  .catch(error => document.getElementById("status").textContent = "Status: Failed. Error: " + error);
+}
+
+function formatMessages(rawData) {
+  // Replace with your logic to split and format raw data into messages
+  const messages = rawData.split('\n'); // Simple line split (might need adjustment)
+  let formattedOutput = '';
+  for (var message of messages) {
+    if (message.trim() !== '') { // Ignore empty lines (optional)
+      message = escapeHtml(message);
+      formattedOutput += `<p>${message}</p>`;
+    }
+  }
+  return formattedOutput;
+}
+
+// Function to escape HTML characters for safe display
+function escapeHtml(str) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  };
+  return str.replace(/[&<>"']/g, char => map[char]);
+}
+const chat = document.getElementById("chat-messages");
+scroll(chat);
+fetchConsoleOutput(); // Call initially
+</script>
+</body>
+</html>
