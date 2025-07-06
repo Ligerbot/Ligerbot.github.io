@@ -24,7 +24,9 @@ welcome {
   align: center;
 }
 p {
+  font-size: 18px;
   padding: 0px 10px;
+  margin: 0px 150px;
 }
 error {
   color: red;
